@@ -14,8 +14,10 @@ class RegisterMobileLayout extends StatelessWidget {
         : Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
               slivers: [
                 SliverFillRemaining(
+                  hasScrollBody: false,
                   child: Column(
                     children: [
                       const Spacer(),
@@ -30,23 +32,33 @@ class RegisterMobileLayout extends StatelessWidget {
                       const Spacer(
                         flex: 2,
                       ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Already a member? ',
-                                style: AppStyle.styleRegular14(context),
-                              ),
-                              TextSpan(
-                                text: 'SignIn',
-                                style: AppStyle.styleSemibold14(context)
-                                    .copyWith(color: const Color(0xff000000)),
-                              ),
-                            ],
+                      // when open keybord
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Already a member?",
+                              style: AppStyle.styleRegular14(context)),
+                          const SizedBox(
+                            width: 10,
                           ),
-                        ),
+                          GestureDetector(
+                            child: Text(
+                              'SignIn',
+                              style: AppStyle.styleSemibold14(context)
+                                  .copyWith(color: const Color(0xff000000)),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PageView(),
+                                  ));
+                            },
+                          )
+                        ],
                       ),
                       const SizedBox(
                         height: 23,
